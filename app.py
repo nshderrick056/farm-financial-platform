@@ -216,7 +216,7 @@ def compare_farm_typology():
     try:
         data = request.json
         year = data.get('year', 2020)
-        report = data.get('report', 'farm business income statement')
+        report = data.get('report', 'Farm business income statement')
         
         result = client.compare_by_farm_typology(year, report)
         return jsonify(result)
@@ -230,7 +230,7 @@ def compare_economic_class():
     try:
         data = request.json
         year = data.get('year', 2020)
-        report = data.get('report', 'farm business income statement')
+        report = data.get('report', 'Farm business income statement')
         
         result = client.compare_by_economic_class(year, report)
         return jsonify(result)
@@ -244,7 +244,7 @@ def compare_regions():
     try:
         data = request.json
         year = data.get('year', 2020)
-        report = data.get('report', 'farm business income statement')
+        report = data.get('report', 'Farm business income statement')
         
         result = client.compare_by_region(year, report)
         return jsonify(result)
