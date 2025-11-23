@@ -131,12 +131,17 @@ class USDAClient:
         if not isinstance(years, list):
             years = [years]
         
+        # Validate years
+        valid_years = [y for y in years if 1996 <= y <= 2022]
+        if not valid_years:
+            return {'error': 'Please select years between 1996 and 2022'}
+        
         params = {
-            'year': years,
+            'year': valid_years,
             'state': state
         }
         
-        # Add optional parameters
+        # Add optional parameters only if they have values
         if report:
             params['report'] = report
         if variable:
@@ -149,6 +154,10 @@ class USDAClient:
             params['category_value'] = category_value
         if category2:
             params['category2'] = category2
+        
+        # Validate required fields
+        if not report and not variable:
+            return {'error': 'Either report or variable parameter is required'}
         
         return self._make_request('surveydata', params, method='POST')
     
