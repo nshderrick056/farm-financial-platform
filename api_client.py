@@ -162,103 +162,103 @@ class USDAClient:
         return self._make_request('surveydata', params, method='POST')
     
     def get_income_statement(self, years, state='all', farmtype=None, 
-                            category=None, category_value=None):
-        """Get farm business income statement data"""
-        return self.get_survey_data(
-            years=years,
-            state=state,
-            report='farm business income statement',
-            farmtype=farmtype,
-            category=category,
-            category_value=category_value
-        )
+                        category=None, category_value=None):
+    """Get farm business income statement data"""
+    return self.get_survey_data(
+        years=years,
+        state=state,
+        report='Farm Business Income Statement',  # CAPITALIZED!
+        farmtype=farmtype,
+        category=category,
+        category_value=category_value
+    )
     
     def get_balance_sheet(self, years, state='all', farmtype=None,
-                         category=None, category_value=None):
-        """Get farm business balance sheet data"""
-        return self.get_survey_data(
-            years=years,
-            state=state,
-            report='farm business balance sheet',
-            farmtype=farmtype,
-            category=category,
-            category_value=category_value
-        )
+                     category=None, category_value=None):
+    """Get farm business balance sheet data"""
+    return self.get_survey_data(
+        years=years,
+        state=state,
+        report='Farm Business Balance Sheet',  # CAPITALIZED!
+        farmtype=farmtype,
+        category=category,
+        category_value=category_value
+    )
     
     def get_financial_ratios(self, years, state='all', farmtype=None,
-                            category=None, category_value=None):
-        """Get farm business financial ratios"""
-        return self.get_survey_data(
-            years=years,
-            state=state,
-            report='farm business financial ratios',
-            farmtype=farmtype,
-            category=category,
-            category_value=category_value
-        )
+                        category=None, category_value=None):
+    """Get farm business financial ratios"""
+    return self.get_survey_data(
+        years=years,
+        state=state,
+        report='Farm Business Financial Ratios',  # CAPITALIZED!
+        farmtype=farmtype,
+        category=category,
+        category_value=category_value
+    )
     
     def get_structural_characteristics(self, years, state='all', farmtype=None,
-                                      category=None, category_value=None):
-        """Get structural characteristics"""
-        return self.get_survey_data(
-            years=years,
-            state=state,
-            report='structural characteristics',
-            farmtype=farmtype,
-            category=category,
-            category_value=category_value
-        )
+                                  category=None, category_value=None):
+    """Get structural characteristics"""
+    return self.get_survey_data(
+        years=years,
+        state=state,
+        report='Structural Characteristics',  # CAPITALIZED!
+        farmtype=farmtype,
+        category=category,
+        category_value=category_value
+    )
     
     def get_government_payments(self, years, state='all', farmtype=None,
-                               category=None, category_value=None):
-        """Get government payments data"""
-        return self.get_survey_data(
-            years=years,
-            state=state,
-            report='government payments',
-            farmtype=farmtype,
-            category=category,
-            category_value=category_value
-        )
+                           category=None, category_value=None):
+    """Get government payments data"""
+    return self.get_survey_data(
+        years=years,
+        state=state,
+        report='Government Payments',  # CAPITALIZED!
+        farmtype=farmtype,
+        category=category,
+        category_value=category_value
+    )
     
     def get_operator_household_income(self, years, state='all', farmtype=None,
-                                     category=None, category_value=None):
-        """Get operator household income"""
-        return self.get_survey_data(
-            years=years,
-            state=state,
-            report='operator household income',
-            farmtype=farmtype,
-            category=category,
-            category_value=category_value
-        )
+                                 category=None, category_value=None):
+    """Get operator household income"""
+    return self.get_survey_data(
+        years=years,
+        state=state,
+        report='Operator Household Income',  # CAPITALIZED!
+        farmtype=farmtype,
+        category=category,
+        category_value=category_value
+    )
     
-    def compare_by_farm_typology(self, year, report='farm business income statement'):
-        """Compare data across different farm typologies"""
-        return self.get_survey_data(
-            years=[year],
-            state='all',
-            report=report,
-            category='collapsed farm typology'
-        )
+    def compare_by_farm_typology(self, year, report='Farm Business Income Statement'):
+    """Compare data across different farm typologies"""
+    return self.get_survey_data(
+        years=[year],
+        state='all',
+        report=report,
+        category='collapsed farm typology'
+    )
     
-    def compare_by_economic_class(self, year, report='farm business income statement'):
-        """Compare data across different economic classes"""
-        return self.get_survey_data(
-            years=[year],
-            state='all',
-            report=report,
-            category='economic class'
-        )
+    def compare_by_economic_class(self, year, report='Farm Business Income Statement'):
+    """Compare data across different economic classes"""
+    return self.get_survey_data(
+        years=[year],
+        state='all',
+        report=report,
+        category='economic class'
+    )
     
-    def compare_by_region(self, year, report='farm business income statement'):
-        """Compare data across NASS regions"""
-        return self.get_survey_data(
-            years=[year],
-            state='all',
-            report=report,
-            category='nass region'
-        )
+    def compare_by_region(self, year, report='Farm Business Income Statement'):
+    """Compare data across NASS regions"""
+    return self.get_survey_data(
+        years=[year],
+        state='all',
+        report=report,
+        category='nass region'
+    )
     
     def get_trend_analysis(self, start_year, end_year, variable, state='all'):
         """
