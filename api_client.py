@@ -22,32 +22,48 @@ class USDAClient:
             raise ValueError("USDA_API_KEY not found in environment variables")
     
     def _make_request(self, endpoint, params=None, method='GET'):
-        """Make HTTP request to USDA API"""
-        url = f"{self.base_url}/{endpoint}"
-        
-        # Add API key to params
-        if params is None:
-            params = {}
-        
-        try:
-            if method == 'GET':
-                # For GET, add api_key to URL params
-                params['api_key'] = self.api_key
-                response = requests.get(url, params=params, timeout=15)
-            elif method == 'POST':
-                # For POST, add api_key to URL and data in body
-                url_with_key = f"{url}?api_key={self.api_key}"
-                response = requests.post(url_with_key, json=params, timeout=15)
+    """Make HTTP request to USDA API"""
+    url = f"{self.base_url}/{endpoint}"
+    
+    if params is None:
+        params = {}
+    
+    try:
+        if method == 'GET':
+            # For GET, add api_key to URL params
+            params['api_key'] = self.api_key
+            response = requests.get(url, params=params, timeout=15)
+        elif method == 'POST':
+            # For POST, add api_key to URL and data in body
+            url_with_key = f"{url}?api_key={self.api_key}"
             
-            response.raise_for_status()
-            return response.json()
+            # CRITICAL: Remove None values from params
+            clean_params = {k: v for k, v in params.items() if v is not None}
+            
+            # Debug logging (optional - remove in production)
+            print(f"DEBUG: POST to {endpoint}")
+            print(f"DEBUG: Body = {clean_params}")
+            
+            response = requests.post(url_with_key, json=clean_params, timeout=15)
         
-        except requests.exceptions.Timeout:
-            return {'error': 'Request timed out. Please try again.'}
-        except requests.exceptions.RequestException as e:
-            return {'error': f'API request failed: {str(e)}'}
-        except json.JSONDecodeError:
-            return {'error': 'Invalid response from API'}
+        response.raise_for_status()
+        return response.json()
+    
+    except requests.exceptions.HTTPError as e:
+        # Get more detailed error info
+        error_msg = f"API request failed: {str(e)}"
+        try:
+            error_detail = response.json()
+            error_msg += f" - Details: {error_detail}"
+        except:
+            error_msg += f" - Response: {response.text[:300]}"
+        return {'error': error_msg}
+    except requests.exceptions.Timeout:
+        return {'error': 'Request timed out. Please try again.'}
+    except requests.exceptions.RequestException as e:
+        return {'error': f'API request failed: {str(e)}'}
+    except json.JSONDecodeError:
+        return {'error': 'Invalid response from API'}
     
     def get_states(self):
         """Get all available states"""
