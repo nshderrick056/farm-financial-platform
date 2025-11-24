@@ -155,20 +155,28 @@ class USDAClient:
         # Ensure state is a list
         if not isinstance(state, list):
             state = [state]
-        
+
         params = {
             'year': valid_years,
             'state': state
         }
-        
+
         # Add optional parameters only if they have values
         if report:
+            if not isinstance(report, list):
+                report = [report]
             params['report'] = report
         if variable:
+            if not isinstance(variable, list):
+                variable = [variable]
             params['variable'] = variable
         if farmtype:
+            if not isinstance(farmtype, list):
+                farmtype = [farmtype]
             params['farmtype'] = farmtype
         if category:
+            if not isinstance(category, list):
+                category = [category]
             params['category'] = category
         if category_value:
             params['category_value'] = category_value
