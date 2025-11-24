@@ -127,7 +127,7 @@ class USDAClient:
         return self._make_request('farmtype', method='GET')
     
     def get_survey_data(self, years, state='all', report=None, variable=None,
-                       farmtype=None, category=None, category_value=None, category2=None):
+                   farmtype=None, category=None, category_value=None, category2=None):
         """
         Get survey data with filters
         
@@ -148,9 +148,13 @@ class USDAClient:
             years = [years]
         
         # Validate years
-        valid_years = [y for y in years if 1996 <= y <= 2022]
+        valid_years = [y for y in years if 1996 <= y <= 2023]
         if not valid_years:
-            return {'error': 'Please select years between 1996 and 2022'}
+            return {'error': 'Please select years between 1996 and 2023'}
+        
+        # Ensure state is a list
+        if not isinstance(state, list):
+            state = [state]
         
         params = {
             'year': valid_years,
