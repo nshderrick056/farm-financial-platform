@@ -108,7 +108,7 @@ Individual Servers:
 Web01: http://18.212.56.252
 Web02: http://3.84.115.138
 
-Demo Video: Watch on YouTube (Add your video link)
+Demo Video: Watch on YouTube https://youtu.be/Jeb0Jv5HddM
 
 🛠 Technology Stack
 Backend
